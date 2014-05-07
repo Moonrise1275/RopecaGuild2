@@ -1,5 +1,6 @@
 package moonrise.ropecaguild2.api;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -166,7 +167,7 @@ public interface IGuildRequester {
 	 */
 	public String getGuild(String player) throws GuildNotExistException;
 	
-	public class Invitation {
+	public class Invitation implements Serializable {
 		public final String guild;
 		public final EntityPlayerMP sender;
 		public final String message;
@@ -177,7 +178,7 @@ public interface IGuildRequester {
 		}
 	}
 	
-	public enum EnumPosition {
+	public enum EnumPosition implements Serializable {
 		GuildMaster(4, "GM"),
 		ViceMaster(3, "V"),
 		Excutive(2, "E"),
