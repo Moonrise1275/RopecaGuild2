@@ -167,6 +167,8 @@ public interface IGuildRequester {
 	 */
 	public String getGuild(String player) throws GuildNotExistException;
 	
+	public String getMaster(String guild) throws GuildNotExistException;
+	
 	public class Invitation implements Serializable {
 		public final String guild;
 		public final EntityPlayerMP sender;
