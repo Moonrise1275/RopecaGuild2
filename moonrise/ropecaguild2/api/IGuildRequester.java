@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import moonrise.ropecaguild2.api.ChatRG.EnumColor;
-import moonrise.ropecaguild2.api.exception.GuildAlreadyExistException;
-import moonrise.ropecaguild2.api.exception.GuildNotExistException;
-import moonrise.ropecaguild2.api.exception.MemberAlreadyExistException;
-import moonrise.ropecaguild2.api.exception.MemberNotExistException;
 import moonrise.ropecaguild2.api.exception.UnauthorizedUserException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,29 +16,28 @@ public interface IGuildRequester {
 	 * 
 	 * @param player : the player who attempt to make a guild
 	 * @param guild : name of the guild
-	 * @throws GuildAlreadyExistException
+	 * @return true if successed.
 	 * @throws UnauthorizedUserException
 	 */
-	public void makeGuild(EntityPlayerMP player, String guild) throws GuildAlreadyExistException, UnauthorizedUserException;
+	public boolean makeGuild(EntityPlayerMP player, String guild) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to disband a guil
+	 * @return true if successed.
 	 * @throws UnauthorizedUserException
-	 * @throws GuildNotExistException
 	 */
-	public void disbandGuild(EntityPlayerMP player) throws UnauthorizedUserException, GuildNotExistException;
+	public boolean disbandGuild(EntityPlayerMP player) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param target
 	 * @param pos
+	 * @return true if successed.
 	 * @throws UnauthorizedUserException
-	 * @throws MemberNotExistException
-	 * @throws GuildNotExistException
 	 */
-	public void setMemberPosition(EntityPlayerMP player, String target, EnumPosition pos) throws UnauthorizedUserException, MemberNotExistException, GuildNotExistException;
+	public boolean setMemberPosition(EntityPlayerMP player, String target, EnumPosition pos) throws UnauthorizedUserException;
 	
 	
 	/**
@@ -50,29 +45,27 @@ public interface IGuildRequester {
 	 * @param player : the player who attempt to do this action
 	 * @param target
 	 * @param message
+	 * @return true if successed
 	 * @throws UnauthorizedUserException
-	 * @throws GuildNotExistException
 	 */
-	public void invite(EntityPlayerMP player, String target, String message) throws UnauthorizedUserException, GuildNotExistException;
+	public boolean invite(EntityPlayerMP player, String target, String message) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param inv
+	 * @return true if successed.
 	 * @throws UnauthorizedUserException
-	 * @throws GuildNotExistException
-	 * @throws MemberAlreadyExistException
 	 */
-	public void accept(EntityPlayerMP player, Invitation inv) throws UnauthorizedUserException, GuildNotExistException, MemberAlreadyExistException;
+	public boolean accept(EntityPlayerMP player, Invitation inv) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
-	 * @throws GuildNotExistException
+	 * @return true if successed. false if player is already solo
 	 * @throws UnauthorizedUserException
-	 * @throws MemberNotExistException
 	 */
-	public void escape(EntityPlayerMP player) throws GuildNotExistException, UnauthorizedUserException, MemberNotExistException;
+	public boolean escape(EntityPlayerMP player) throws UnauthorizedUserException;
 	
 	
 	/**
@@ -84,10 +77,9 @@ public interface IGuildRequester {
 	/**
 	 * 
 	 * @param guild
-	 * @return all members of that guild
-	 * @throws GuildNotExistException
+	 * @return all members of that guild. null if guild is not exist
 	 */
-	public Set<String> getMembers(String guild) throws GuildNotExistException;
+	public Set<String> getMembers(String guild);
 	
 	/**
 	 * 
@@ -108,36 +100,34 @@ public interface IGuildRequester {
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param color
+	 * @return true if successed. null if guild is not exist
 	 * @throws UnauthorizedUserException
-	 * @throws GuildNotExistException
 	 */
-	public void setColor(EntityPlayerMP player, EnumColor color) throws UnauthorizedUserException, GuildNotExistException;
+	public boolean setColor(EntityPlayerMP player, EnumColor color) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param guild
-	 * @return
-	 * @throws GuildNotExistException
+	 * @return null if guild is not exist
 	 */
-	public EnumColor getColor(String guild) throws GuildNotExistException;
+	public EnumColor getColor(String guild);
 	
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param location
+	 * @return true if successed. null if guild is not exist.
 	 * @throws UnauthorizedUserException
-	 * @throws GuildNotExistException
 	 */
-	public void setHall(EntityPlayerMP player, Location location) throws UnauthorizedUserException, GuildNotExistException;
+	public boolean setHall(EntityPlayerMP player, Location location) throws UnauthorizedUserException;
 	
 	/**
 	 * 
 	 * @param guild
-	 * @return
-	 * @throws GuildNotExistException
+	 * @return Location instance which is guild's main hall. null if guild is not exist
 	 */
-	public Location getHall(String guild) throws GuildNotExistException;
+	public Location getHall(String guild);
 	
 	
 	/**
@@ -145,29 +135,33 @@ public interface IGuildRequester {
 	 * @param guild
 	 * @param tagname
 	 * @param tag
-	 * @throws GuildNotExistException
+	 * @return true if successed. null if guild is not exist
 	 */
-	public void setTag(String guild, String tagname, NBTTagCompound tag) throws GuildNotExistException;
+	public boolean setTag(String guild, String tagname, NBTTagCompound tag);
 	
 	/**
 	 * 
 	 * @param guild
 	 * @param tagname
-	 * @return
-	 * @throws GuildNotExistException
+	 * @return NBT tag which holds guild's data. null if guild is not exist
 	 */
-	public NBTTagCompound getTag(String guild, String tagname) throws GuildNotExistException;
+	public NBTTagCompound getTag(String guild, String tagname);
 	
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
-	 * @return
-	 * @throws GuildNotExistException
+	 * @return guild's name that player is included. null if player is solo
 	 */
-	public String getGuild(String player) throws GuildNotExistException;
+	public String getGuild(String player);
 	
-	public String getMaster(String guild) throws GuildNotExistException;
+	
+	/**
+	 * 
+	 * @param guild
+	 * @return master of that guild. null if guild is not exist
+	 */
+	public String getMaster(String guild);
 	
 	public class Invitation implements Serializable {
 		public final String guild;
