@@ -1,37 +1,36 @@
 package moonrise.ropecaguild2.api;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-
 import net.minecraft.event.ClickEvent;
-import net.minecraft.util.ChatComponentStyle;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
 
-public class ChatRG extends ChatComponentText {
+public class ChatUtil {
 	
-	public ChatRG(String chat, EnumChatFormatting color, String command) {
-		super(chat);
-		if (command != null && !command.isEmpty()) {
-			System.out.println(command + command + command);
-			this.setChatStyle(new ChatStyle().setColor(color).setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command)));
+	public static ChatComponentText get(String text, EnumColor color, String command) {
+		ChatComponentText chat = new ChatComponentText(text);
+		if (command != null) {
+			chat.setChatStyle(new ChatStyle().setColor(color.ecf).setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command)));
 		} else {
-			this.setChatStyle(new ChatStyle().setColor(color));	
+			chat.setChatStyle(new ChatStyle().setColor(color.ecf));
 		}
-	}
-	public ChatRG(String chat, EnumChatFormatting color) {
-		this(chat, color, "");
+		return chat;
 	}
 	
-	public ChatRG(String chat) {
-		this(chat, EnumChatFormatting.WHITE);
+	public static ChatComponentText get(String text, EnumColor color) {
+		return get(text, color, null);
 	}
-
+	
+	public static ChatComponentText get(String text) {
+		return get(text, EnumColor.white);
+	}
+	
+	public static ChatComponentText sendInfo(String text) {
+		ChatComponentText chat = get("[Info] ", EnumColor.aqua);
+		chat.appendSibling(get(text));
+		return chat;
+	}
+	
 	public enum EnumColor {
 		black(EnumChatFormatting.BLACK),
 		darkblue(EnumChatFormatting.DARK_BLUE),
@@ -55,4 +54,5 @@ public class ChatRG extends ChatComponentText {
 			this.ecf = e;
 		}
 	}
+
 }

@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import moonrise.ropecaguild2.api.ChatRG.EnumColor;
-import moonrise.ropecaguild2.api.exception.UnauthorizedUserException;
+import moonrise.ropecaguild2.api.ChatUtil.EnumColor;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -17,17 +16,15 @@ public interface IGuildRequester {
 	 * @param player : the player who attempt to make a guild
 	 * @param guild : name of the guild
 	 * @return true if successed.
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean makeGuild(EntityPlayerMP player, String guild) throws UnauthorizedUserException;
+	public boolean makeGuild(EntityPlayerMP player, String guild);
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to disband a guil
 	 * @return true if successed.
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean disbandGuild(EntityPlayerMP player) throws UnauthorizedUserException;
+	public boolean disbandGuild(EntityPlayerMP player);
 	
 	/**
 	 * 
@@ -35,9 +32,8 @@ public interface IGuildRequester {
 	 * @param target
 	 * @param pos
 	 * @return true if successed.
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean setMemberPosition(EntityPlayerMP player, String target, EnumPosition pos) throws UnauthorizedUserException;
+	public boolean setMemberPosition(EntityPlayerMP player, String target, EnumPosition pos);
 	
 	
 	/**
@@ -46,26 +42,23 @@ public interface IGuildRequester {
 	 * @param target
 	 * @param message
 	 * @return true if successed
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean invite(EntityPlayerMP player, String target, String message) throws UnauthorizedUserException;
+	public boolean invite(EntityPlayerMP player, String target, String message);
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param inv
 	 * @return true if successed.
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean accept(EntityPlayerMP player, Invitation inv) throws UnauthorizedUserException;
+	public boolean accept(EntityPlayerMP player, Invitation inv);
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @return true if successed. false if player is already solo
-	 * @throws UnauthorizedUserException
 	 */
-	public boolean escape(EntityPlayerMP player) throws UnauthorizedUserException;
+	public boolean escape(EntityPlayerMP player);
 	
 	
 	/**
@@ -77,7 +70,7 @@ public interface IGuildRequester {
 	/**
 	 * 
 	 * @param guild
-	 * @return all members of that guild. null if guild is not exist
+	 * @return Set of all members of that guild. null if guild is not exist
 	 */
 	public Set<String> getMembers(String guild);
 	
@@ -100,10 +93,9 @@ public interface IGuildRequester {
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param color
-	 * @return true if successed. null if guild is not exist
-	 * @throws UnauthorizedUserException
+	 * @return true if successed. false if guild is not exist
 	 */
-	public boolean setColor(EntityPlayerMP player, EnumColor color) throws UnauthorizedUserException;
+	public boolean setColor(EntityPlayerMP player, EnumColor color);
 	
 	/**
 	 * 
@@ -117,10 +109,9 @@ public interface IGuildRequester {
 	 * 
 	 * @param player : the player who attempt to do this action
 	 * @param location
-	 * @return true if successed. null if guild is not exist.
-	 * @throws UnauthorizedUserException
+	 * @return true if successed. false if guild is not exist.
 	 */
-	public boolean setHall(EntityPlayerMP player, Location location) throws UnauthorizedUserException;
+	public boolean setHall(EntityPlayerMP player, Location location);
 	
 	/**
 	 * 
@@ -135,7 +126,7 @@ public interface IGuildRequester {
 	 * @param guild
 	 * @param tagname
 	 * @param tag
-	 * @return true if successed. null if guild is not exist
+	 * @return true if successed. false if guild is not exist
 	 */
 	public boolean setTag(String guild, String tagname, NBTTagCompound tag);
 	
