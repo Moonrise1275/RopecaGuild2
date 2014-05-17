@@ -4,7 +4,10 @@ RopecaGuild2
 API for mod developers. Feel free to use my API!!
 And also for bug tracker
 
-#####API version : 1.1
+#####Newest API version : 1.2
+
+#####[Download deobfuscated Ropeca Guild 2](https://mods.io/mods/1062-ropeca-guild-2-deobfuscated)
+
 
 ***
 
