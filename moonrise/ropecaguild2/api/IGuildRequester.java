@@ -13,52 +13,52 @@ public interface IGuildRequester {
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to make a guild
+	 * @param sender : the player who attempt to make a guild
 	 * @param guild : name of the guild
 	 * @return true if successed.
 	 */
-	public boolean makeGuild(EntityPlayerMP player, String guild);
+	public boolean makeGuild(String sender, String guild);
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to disband a guil
+	 * @param sender : the player who attempt to disband a guil
 	 * @return true if successed.
 	 */
-	public boolean disbandGuild(EntityPlayerMP player);
+	public boolean disbandGuild(String sender);
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to do this action
-	 * @param target
+	 * @param sender : the player who attempt to do this action
+	 * @param target : the player which sender want to set position
 	 * @param pos
 	 * @return true if successed.
 	 */
-	public boolean setMemberPosition(EntityPlayerMP player, String target, EnumPosition pos);
+	public boolean setMemberPosition(String sender, String target, EnumPosition pos);
 	
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to do this action
-	 * @param target
+	 * @param sender : the player who attempt to do this action
+	 * @param target : the player which sender want to invite
 	 * @param message
 	 * @return true if successed
 	 */
-	public boolean invite(EntityPlayerMP player, String target, String message);
+	public boolean invite(String sender, String target, String message);
 	
 	/**
 	 * 
 	 * @param player : the player who attempt to do this action
-	 * @param inv
+	 * @param inv : invitation which sender want to accept
 	 * @return true if successed.
 	 */
-	public boolean accept(EntityPlayerMP player, Invitation inv);
+	public boolean accept(String sender, Invitation inv);
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to do this action
+	 * @param sender : the player who attempt to do this action
 	 * @return true if successed. false if player is already solo
 	 */
-	public boolean escape(EntityPlayerMP player);
+	public boolean escape(String sender);
 	
 	
 	/**
@@ -70,7 +70,7 @@ public interface IGuildRequester {
 	/**
 	 * 
 	 * @param guild
-	 * @return Set of all members of that guild. null if guild is not exist
+	 * @return get of all members of that guild. null if guild is not exist
 	 */
 	public Set<String> getMembers(String guild);
 	
@@ -91,27 +91,27 @@ public interface IGuildRequester {
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to do this action
+	 * @param sender : the player who attempt to do this action
 	 * @param color
 	 * @return true if successed. false if guild is not exist
 	 */
-	public boolean setColor(EntityPlayerMP player, EnumColor color);
+	public boolean setColor(String sender, EnumColor color);
 	
 	/**
 	 * 
 	 * @param guild
-	 * @return null if guild is not exist
+	 * @return given guild's symbol color. null if that guild is not exist
 	 */
 	public EnumColor getColor(String guild);
 	
 	
 	/**
 	 * 
-	 * @param player : the player who attempt to do this action
+	 * @param sender : the player who attempt to do this action
 	 * @param location
 	 * @return true if successed. false if guild is not exist.
 	 */
-	public boolean setHall(EntityPlayerMP player, Location location);
+	public boolean setHall(String sender, Location location);
 	
 	/**
 	 * 
@@ -156,9 +156,9 @@ public interface IGuildRequester {
 	
 	public class Invitation implements Serializable {
 		public final String guild;
-		public final EntityPlayerMP sender;
+		public final String sender;
 		public final String message;
-		public Invitation(String guild, EntityPlayerMP sender, String message) {
+		public Invitation(String guild, String sender, String message) {
 			this.guild = guild;
 			this.sender = sender;
 			this.message = message;
